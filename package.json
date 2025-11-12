@@ -1,0 +1,35 @@
+{
+  "name": "@tangjian/eslint-config",
+  "version": "1.0.0",
+  "description": "Tangjian's eslint config preset",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsdown"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tangjian1891/eslint-config.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/tangjian1891/eslint-config/issues"
+  },
+  "homepage": "https://github.com/tangjian1891/eslint-config#readme",
+  "devDependencies": {
+    "eslint": "^9.39.1",
+    "eslint-plugin-vue": "^10.5.1",
+    "tsdown": "^0.15.12",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vue-eslint-parser": "^10.2.0"
+  },
+  "dependencies": {
+    "@eslint/js": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "typescript-eslint": "^8.46.3",
+    "vue": "^3.5.24"
+  }
+}
