@@ -1,4 +1,5 @@
 export { createConfig as createJsConfig } from "./js";
+export { createConfig as createSortConfig } from "./sort";
 export { createConfig as createTypescriptConfig } from "./typescript";
 export { createConfig as createVueConfig } from "./vue";
 

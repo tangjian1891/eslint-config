@@ -1,7 +1,7 @@
 import { defineConfig } from "eslint/config";
 import pluginVue from "eslint-plugin-vue";
+import tseslint from "typescript-eslint";
 import parserVue from "vue-eslint-parser";
-import tseslint, { plugin } from "typescript-eslint";
 
 function createConfig(options: any) {
   if (!options.vue) return;
