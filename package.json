@@ -4,7 +4,8 @@
   "description": "Tangjian's eslint config preset",
   "main": "index.js",
   "scripts": {
-    "build": "tsdown"
+    "build": "tsdown",
+    "lint":"cross-env CI=true eslint . --fix"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   },
   "homepage": "https://github.com/tangjian1891/eslint-config#readme",
   "devDependencies": {
+    "@types/node": "^24.10.1",
     "eslint": "^9.39.1",
     "eslint-plugin-unused-imports": "^4.3.0",
     "eslint-plugin-vue": "^10.5.1",
@@ -29,6 +31,7 @@
   },
   "dependencies": {
     "@eslint/js": "^9.39.1",
+    "cross-env": "^10.1.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "typescript-eslint": "^8.46.3",

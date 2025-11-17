@@ -1,6 +1,6 @@
 import { defineConfig } from "eslint/config";
 import tseslint from "typescript-eslint";
-function createConfig(options) {
+function createConfig(options: Record<string, boolean>) {
   if (!options.typescript) return;
   return defineConfig({
     name: "typescript",

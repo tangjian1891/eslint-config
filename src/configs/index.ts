@@ -1,8 +1,7 @@
+export { createConfig as createCiConfig } from "./ci";
 export { createConfig as createJsConfig } from "./js";
-export { createConfig as createSortConfig } from "./sort";
 export { createConfig as createTypescriptConfig } from "./typescript";
 export { createConfig as createVueConfig } from "./vue";
-
 //  put ignore pattern
 export { createConfig as createIgnoreConfig } from "./ignore";
 

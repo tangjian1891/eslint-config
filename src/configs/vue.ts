@@ -3,7 +3,7 @@ import pluginVue from "eslint-plugin-vue";
 import tseslint from "typescript-eslint";
 import parserVue from "vue-eslint-parser";
 
-function createConfig(options: any) {
+function createConfig(options: Record<string, boolean>) {
   if (!options.vue) return;
   //   <script lang="ts">
   if (options.typescript) {
