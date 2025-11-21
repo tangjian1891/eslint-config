@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "tsdown",
-    "lint":"cross-env CI=true eslint . --fix"
+    "lint": "cross-env CI=true eslint . --fix",
+    "debug": "eslint ./a.js --fix",
+    "node": "tsx ./eslint.config.ts"
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,7 @@
   },
   "homepage": "https://github.com/tangjian1891/eslint-config#readme",
   "devDependencies": {
+    "@types/estree": "^1.0.8",
     "@types/node": "^24.10.1",
     "eslint": "^9.39.1",
     "eslint-plugin-unused-imports": "^4.3.0",
