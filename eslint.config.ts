@@ -3,6 +3,8 @@ import { defineConfig } from "eslint/config";
 import { createConfigs } from "./src";
 // eslint.config.js
 import { Linter } from "eslint";
+import { noConsoleWithFix } from "./src/enhance-fix/no-console";
+import { noDebuggerWithFix } from "./src/enhance-fix/no-debugger";
 // 1. 获取原版 no-console 规则
 const safeLinter = new Linter({ configType: "eslintrc" });
 const originalNoConsole = safeLinter.getRules().get("no-console");
@@ -10,7 +12,7 @@ const originalNoConsole = safeLinter.getRules().get("no-console");
 // const originalNoConsole = linter.getRules().get("no-console");
 // 2. 定义带 Fix 功能的 Wrapper 规则
 // 2. 定义魔改版规则
-const noConsoleWithFix = {
+const noConsoleWithFix2 = {
   meta: {
     ...originalNoConsole.meta,
     fixable: "code", // 必须保留
@@ -28,14 +30,13 @@ const noConsoleWithFix = {
       {},
       {
         get(_target, prop) {
-          // 1. 拦截 report
+          // 1. 拦截 report，是一个函数
           if (prop === "report") {
             return (descriptor) => {
-              // 注入 fix 函数
+              // 注入 eslint没有的 fix 函数
               descriptor.fix = (fixer) => {
                 const node = descriptor.node;
                 const callExpression = node.parent; // CallExpression
-
                 // 确保是 ExpressionStatement (带分号的那种完整语句)
                 if (
                   callExpression &&
@@ -44,18 +45,11 @@ const noConsoleWithFix = {
                 ) {
                   const statementNode = callExpression.parent;
                   const sourceCode = context.sourceCode;
-
-                  // --- 智能删除整行逻辑开始 ---
-
-                  // 1. 获取当前行的完整文本
                   const lineNum = statementNode.loc.start.line;
                   const lineText = sourceCode.lines[lineNum - 1];
-
-                  // 2. 获取节点的文本
                   const nodeText = sourceCode.getText(statementNode);
 
-                  // 3. 判断：去除首尾空格后，如果 "整行内容" 等于 "节点内容"
-                  // 说明这一行只有这句代码（没有注释，没有其他语句）
+                  // 1. 判断：去除首尾空格后，如果 "整行内容" 等于 "节点内容"
                   if (lineText.trim() === nodeText) {
                     // 计算删除范围：从本行行首，删到下一行行首
                     const lineStart = sourceCode.getIndexFromLoc({
@@ -77,21 +71,12 @@ const noConsoleWithFix = {
                         column: 0,
                       });
                     }
-
                     return fixer.removeRange([lineStart, rangeEnd]);
                   }
-
-                  // --- 智能删除整行逻辑结束 ---
-
-                  // 4. 兜底：如果这一行后面还有注释 (e.g. console.log(1); // comment)
-                  // 或者有其他代码，我们只删除语句本身，不删整行，以免误删其他东西
+                  // 2 或者有其他代码，我们只删除语句本身，不删整行，以免误删其他东西
                   return fixer.remove(statementNode);
                 }
-
-                // 嵌入式写法 (if (x) console.log(x)) -> 替换为 void 0
-                return fixer.replaceText(callExpression, "void 0");
               };
-
               // 调用真实的 context.report
               context.report(descriptor);
             };
@@ -108,15 +93,8 @@ const noConsoleWithFix = {
 
           return value;
         },
-
-        // 为了让规则里的 ('prop' in context) 检查也能通过，我们需要拦截 has
-        has(_target, prop) {
-          return prop in context;
-        },
       }
     );
-    // --- 核心修改结束 ---
-
     // 将在这个“虚假目标”上建立的 Proxy 传给原规则
     return originalNoConsole.create(contextProxy);
   },
@@ -135,13 +113,16 @@ export default defineConfig(
       custom: {
         rules: {
           "no-console-mod": noConsoleWithFix,
+          "no-debugger-mod": noDebuggerWithFix,
         },
       },
     },
     rules: {
-      "no-console": "error",
+      "no-console": "off",
+      "no-debugger": "off",
       "no-undef": "off",
-      // "custom/no-console-mod": "error", // 开启魔改版
+      "custom/no-console-mod": "error", // 开启魔改版
+      "custom/no-debugger-mod": "error", // 开启魔改版
     },
   }
 );
