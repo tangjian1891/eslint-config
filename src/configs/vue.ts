@@ -1,12 +1,19 @@
 import { defineConfig } from "eslint/config";
-import pluginVue from "eslint-plugin-vue";
-import tseslint from "typescript-eslint";
-import parserVue from "vue-eslint-parser";
 
-function createConfig(options: Record<string, boolean>) {
+async function createConfig(options: Record<string, boolean>) {
   if (!options.vue) return;
+  // get async module
+  const m = await import("eslint-plugin-vue");
+  const pluginVue = m.default;
+
   //   <script lang="ts">
   if (options.typescript) {
+    const mm = await import("vue-eslint-parser");
+    const parserVue = mm.default;
+
+    const mmm = await import("@typescript-eslint/parser");
+    const tseslint = mmm.default;
+
     return defineConfig({
       name: "vue&typescript",
       files: ["**/*.vue"],

@@ -3,17 +3,17 @@ import { defineConfig } from "eslint/config";
 import * as configFactores from "./configs";
 
 type ConfigFactory = (
-  options: Record<string, unknown>
+  options: Record<string, unknown>,
 ) => ReturnType<typeof defineConfig>;
 
-export function createConfigs(options: Record<string, unknown> = {}) {
+export async function createConfigs(options: Record<string, unknown> = {}) {
   const configs: ReturnType<typeof defineConfig>[] = [];
 
   for (const key in configFactores) {
     const factory = configFactores[
       key as keyof typeof configFactores
     ] as ConfigFactory;
-    const config = factory(options);
+    const config = await factory(options);
     config && configs.push(...config);
   }
 
