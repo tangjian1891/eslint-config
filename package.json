@@ -1,14 +1,21 @@
 {
-  "name": "@tangjian/eslint-config",
-  "version": "1.0.0",
+  "name": "@tangjian1891/eslint-config",
+  "version": "0.0.1-beta.2",
   "description": "Tangjian's eslint config preset",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsdown",
-    "lint": "cross-env CI=true eslint . --fix",
+    "lint": "cross-env ci=true eslint . --fix",
     "debug": "eslint ./a.js --fix",
     "node": "tsx ./eslint.config.ts"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tangjian1891/eslint-config.git"
@@ -23,21 +30,21 @@
   "homepage": "https://github.com/tangjian1891/eslint-config#readme",
   "devDependencies": {
     "@types/estree": "^1.0.8",
-    "@types/node": "^24.10.1",
+    "@types/node": "^24.10.1"
+  },
+  "dependencies": {
+    "@eslint/js": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "typescript-eslint": "^8.46.3",
     "eslint": "^9.39.1",
     "eslint-plugin-unused-imports": "^4.3.0",
     "eslint-plugin-vue": "^10.5.1",
     "tsdown": "^0.15.12",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
-    "vue-eslint-parser": "^10.2.0"
-  },
-  "dependencies": {
-    "@eslint/js": "^9.39.1",
     "cross-env": "^10.1.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-simple-import-sort": "^12.1.1",
-    "typescript-eslint": "^8.46.3",
+    "vue-eslint-parser": "^10.2.0",
     "vue": "^3.5.24"
   }
 }

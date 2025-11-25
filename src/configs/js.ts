@@ -1,6 +1,7 @@
 import js from "@eslint/js";
 import { defineConfig } from "eslint/config";
 
+// default add
 function createConfig() {
   return defineConfig({
     name: "js",

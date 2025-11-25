@@ -4,7 +4,7 @@ import { Linter } from "eslint";
 const safeLinter = new Linter({ configType: "eslintrc" });
 const originalNoConsole = safeLinter.getRules().get("no-console");
 
-export const noConsoleWithFix: Rule.RuleModule = {
+export const rule: Rule.RuleModule = {
   meta: {
     ...originalNoConsole?.meta,
     fixable: "code",

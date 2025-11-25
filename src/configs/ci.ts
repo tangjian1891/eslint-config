@@ -1,9 +1,11 @@
 import { defineConfig } from "eslint/config";
 import eslintPluginSimpleImportSort from "eslint-plugin-simple-import-sort";
 import unusedImports from "eslint-plugin-unused-imports";
-export function createConfig(options: Record<string, boolean>) {
-  if (!options.ci || process.env["CI"] !== "true") return;
+import { noConsole, noDebugger } from "../rules";
 
+// inclue unused-imports , sort-imports and enhance  rules (support --fix)
+export function createConfig(options: Record<string, boolean>) {
+  if (!options.ci && process.env["ci"] !== "true") return;
   return defineConfig(
     {
       name: "ci-unused-imports",
@@ -32,6 +34,24 @@ export function createConfig(options: Record<string, boolean>) {
       rules: {
         "simple-import-sort/imports": "error",
         "simple-import-sort/exports": "error",
+      },
+    },
+    {
+      name: "ci-fixer",
+      files: ["**/*.{js,ts,jsx,tsx}"],
+      plugins: {
+        ci: {
+          rules: {
+            "no-console": noConsole,
+            "no-debugger": noDebugger,
+          },
+        },
+      },
+      rules: {
+        "no-console": "off", //close base rule
+        "no-debugger": "off", // close base rule
+        "ci/no-console": "error",
+        "ci/no-debugger": "error",
       },
     }
   );

@@ -4,7 +4,7 @@ import { Linter } from "eslint";
 const safeLinter = new Linter({ configType: "eslintrc" });
 const originalNoDebugger = safeLinter.getRules().get("no-debugger");
 
-export const noDebuggerWithFix: Rule.RuleModule = {
+export const rule: Rule.RuleModule = {
   meta: {
     ...originalNoDebugger?.meta,
     fixable: "code",

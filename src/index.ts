@@ -6,7 +6,7 @@ type ConfigFactory = (
   options: Record<string, unknown>
 ) => ReturnType<typeof defineConfig>;
 
-export function createConfigs(options: Record<string, unknown>) {
+export function createConfigs(options: Record<string, unknown> = {}) {
   const configs: ReturnType<typeof defineConfig>[] = [];
 
   for (const key in configFactores) {
