@@ -11,7 +11,7 @@ async function createConfig(options: Record<string, boolean>) {
     const mm = await import("vue-eslint-parser");
     const parserVue = mm.default;
 
-    const mmm = await import("@typescript-eslint/parser");
+    const mmm = await import("typescript-eslint");
     const tseslint = mmm.default;
 
     return defineConfig({

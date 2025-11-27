@@ -6,7 +6,9 @@ type ConfigFactory = (
   options: Record<string, unknown>,
 ) => ReturnType<typeof defineConfig>;
 
-export async function createConfigs(options: Record<string, unknown> = {}) {
+export async function createPromiseConfigs(
+  options: Record<string, unknown> = {},
+): Promise<any[]> {
   const configs: ReturnType<typeof defineConfig>[] = [];
 
   for (const key in configFactores) {
@@ -14,7 +16,9 @@ export async function createConfigs(options: Record<string, unknown> = {}) {
       key as keyof typeof configFactores
     ] as ConfigFactory;
     const config = await factory(options);
-    config && configs.push(...config);
+    if (Array.isArray(config)) {
+      configs.push(...config);
+    }
   }
 
   return configs.filter(Boolean);
