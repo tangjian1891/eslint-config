@@ -38,7 +38,6 @@ export function createConfig(options: Record<string, boolean>) {
     },
     {
       name: "ci-fixer",
-      files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"]
       plugins: {
         ci: {
           rules: {

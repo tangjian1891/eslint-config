@@ -1,25 +1,18 @@
-import { defineConfig } from "eslint/config";
-
-import * as configFactores from "./configs";
-
-type ConfigFactory = (
-  options: Record<string, unknown>,
-) => ReturnType<typeof defineConfig>;
+import {  configFactories } from "./configs";
 
 export async function createPromiseConfigs(
-  options: Record<string, unknown> = {},
+  options: Record<string, any> = {},
 ): Promise<any[]> {
-  const configs: ReturnType<typeof defineConfig>[] = [];
+  const configs: any[] = [];
 
-  for (const key in configFactores) {
-    const factory = configFactores[
-      key as keyof typeof configFactores
-    ] as ConfigFactory;
+  for (const factory of configFactories) {
     const config = await factory(options);
     if (Array.isArray(config)) {
       configs.push(...config);
+    } else if (config) {
+      configs.push(config);
     }
   }
 
-  return configs.filter(Boolean);
+  return configs;
 }

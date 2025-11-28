@@ -2,6 +2,8 @@ import { defineConfig } from "eslint/config";
 
 async function createConfig(options: Record<string, boolean>) {
   if (!options.vue) return;
+  console.log('vue');
+  
   // get async module
   const m = await import("eslint-plugin-vue");
   const pluginVue = m.default;
