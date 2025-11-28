@@ -13,6 +13,13 @@ export async function createPromiseConfigs(
       configs.push(config);
     }
   }
+  configs.push({
+    rules:{
+      "unused-imports/no-unused-vars":"off",
+      "no-unused-vars":"off",
+      "@typescript-eslint/no-unused-vars":"off"
+    }
+  })
 
   return configs;
 }

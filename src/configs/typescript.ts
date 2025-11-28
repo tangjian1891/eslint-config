@@ -1,7 +1,6 @@
 import { defineConfig } from "eslint/config";
 async function createConfig(options: Record<string, boolean>) {
   if (!options.typescript) return;
-  console.log("zheshi ts");
   
   const mmm = await import("typescript-eslint");
   const tseslint = mmm.default;
