@@ -5,7 +5,6 @@ import { defineConfig } from "eslint/config";
 function createConfig() {
   return defineConfig({
     name: "js",
-    files: ["**/*.{js,mjs,cjs,jsx}"],
     plugins: {
       js,
     },
