@@ -13,7 +13,7 @@ function createConfig() {
       globals: {
         ...globals.browser,
         ...globals.node,
-        ...globals.vue
+        ...globals.vue,
       },
       parserOptions: {
         allowReserved: false,
@@ -24,7 +24,6 @@ function createConfig() {
         },
       },
     },
-    rules: {},
   });
 }
 

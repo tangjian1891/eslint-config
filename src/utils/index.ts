@@ -1,3 +1,11 @@
-import { interopDefault } from "./interopDefault";
+import { loadTypescriptEslint, loadVueParser, loadVuePlugin } from "./loaders";
+import { isPackageExists } from "./is-package-exist";
+import { getPackageMtime } from "./getPackageMtime";
 
-export const utils = { interopDefault };
+export const utils = {
+  loadTypescriptEslint,
+  loadVueParser,
+  loadVuePlugin,
+  isPackageExists,
+  getPackageMtime,
+};

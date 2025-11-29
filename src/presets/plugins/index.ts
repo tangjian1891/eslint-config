@@ -1,9 +1,10 @@
-import { createConfig as createCiConfig } from "./ci";
-import { createConfig as createIgnoreConfig } from "./ignore";
+import { createConfig as createCiConfig } from "./custom";
 import { createConfig as createJsConfig } from "./js";
-import { createConfig as createPrettierConfig } from "./prettier";
+
 import { createConfig as createTypescriptConfig } from "./typescript";
 import { createConfig as createVueConfig } from "./vue";
+import { createConfig as createSimpleImportSortConfig } from "./simple-import-sort";
+import { createConfig as createUnusedImportsConfig } from "./unused-imports";
 
 /**
  * Array of config factory functions in strict order.
@@ -13,13 +14,12 @@ import { createConfig as createVueConfig } from "./vue";
  * 3. vue - Vue support (conditional)
  * 4. ci - CI-specific rules (conditional)
  * 5. ignore - ignore patterns
- * 6. prettier - MUST BE LAST (disables conflicting formatting rules)
  */
-export const configFactories = [
+export default [
   createJsConfig,
   createTypescriptConfig,
   createVueConfig,
   createCiConfig,
-  createIgnoreConfig,
-  createPrettierConfig, // MUST BE LAST!
+  createSimpleImportSortConfig,
+  createUnusedImportsConfig,
 ];

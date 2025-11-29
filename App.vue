@@ -2,19 +2,38 @@
 import HelloWorld from './components/HelloWorld.vue'
 let a=123
 console.log(12);
+debugger
+var x = 1
+var x = 2
+eval("console.log('evil')")
+with(console) { log('with statement') }
+let unused_variable = "never used"
+if(true){
+console.log("no space")
+}
+function test(a, a, b) { return a + b }
+const arr = new Array(1, 2, 3)
 
+const props = defineProps(['title'])
+props.title = 'new value'
+
+const count = ref(0)
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <div v-for="item in items">{{ item }}</div>
+  <div v-if="show" v-for="i in list">{{ i }}</div>
+  <div v-if="ok"></div><div v-else-if="no"></div><div v-else-if="yes"></div>
+  <component :is="comp" v-model="val" v-model="val2"></component>
+  <div :style="color: red"></div>
+  <button @click="handleClick()">Click</button>
+  <input v-model="count.value" />
+  <div key="static-key" v-for="x in arr">{{ x }}</div>
+  <textarea>{{ message }}</textarea>
+  <div v-text="msg" v-html="html"></div>
+  <img src="./logo.png">
+  <MyComponent ref="myRef"></MyComponent>
+  123
 </template>
 
 <style scoped>

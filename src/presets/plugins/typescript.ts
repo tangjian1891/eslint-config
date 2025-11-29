@@ -1,9 +1,10 @@
 import { defineConfig } from "eslint/config";
+import { utils } from "../../utils";
+
 async function createConfig(options: Record<string, boolean>) {
-  if (!options.typescript) return;
-  
-  const mmm = await import("typescript-eslint");
-  const tseslint = mmm.default;
+  if (!options.typescript) return [];
+
+  const tseslint = await utils.loadTypescriptEslint();
 
   return defineConfig({
     name: "typescript",
@@ -20,6 +21,7 @@ async function createConfig(options: Record<string, boolean>) {
     },
     rules: {
       "@typescript-eslint/no-unused-expressions": "off",
+      "@typescript-eslint/ban-ts-comment": "off",
     },
   });
 }
