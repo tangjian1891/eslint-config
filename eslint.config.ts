@@ -1,4 +1,4 @@
-import { createPromiseConfigs } from "./src";
+import createPromiseConfigs from "./src";
 
 console.time("[MyESLint] Total Config Factory time");
 let c = createPromiseConfigs({

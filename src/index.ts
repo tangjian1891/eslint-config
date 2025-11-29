@@ -7,7 +7,7 @@ import type { Linter } from "eslint";
 const CACHE_KEY = Symbol.for("MY_ESLINT_CACHE_DATA");
 const OPTIONS_KEY = Symbol.for("MY_ESLINT_CACHE_OPTIONS");
 
-export async function createPromiseConfigs(
+export default async function createPromiseConfigs(
   options: Record<string, any> = {},
 ): Promise<Linter.FlatConfig[]> {
   // options+ package.json mtime 作为参数一致性标识
