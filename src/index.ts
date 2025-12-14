@@ -27,6 +27,8 @@ export default async function createPromiseConfigs(
   options.vue = options.vue ?? utils.isPackageExists("vue");
   options.typescript =
     options.typescript ?? utils.isPackageExists("typescript");
+  
+    options.ci = options.ci ?? false;
 
   const configs = await createPresetConfigs(options);
 
